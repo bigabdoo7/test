@@ -7,7 +7,7 @@ output:
     number_sections: TRUE
 ---
 
-```{r setup, message= TRUE, include=FALSE}
+```{r setup, message= FALSE ,warning = FALSE, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 library(dplyr)
@@ -33,8 +33,9 @@ datatable(data, rownames = FALSE, filter = "top", options = list(pageLength = 10
 
 
 ### interactif
-```{r}
+```{r message= FALSE ,warning = FALSE}
 library(dygraphs)
+library(zoo)
 library(xts)
 data3  = as.xts(data, order.by=data[,"date"])
 dygraph(data3 , main = "New Haven Temperatures")
