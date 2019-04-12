@@ -1,0 +1,41 @@
+---
+title: "index"
+output: 
+  html_document:
+    toc: TRUE
+    code_folding: "hide"
+    number_sections: TRUE
+---
+
+```{r setup, message= TRUE, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+```
+
+## titre 1
+
+```{r  fig.align = "center" ,fig.height = 10, fig.width = 12, }
+data <- read.table("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/3_TwoNumOrdered.csv", header=T)
+data$date <- as.Date(data$date)
+
+ggplot(data, aes(x = date, y= value))+
+  geom_area(fill = "#ffff00")
+```
+
+
+## DataTable
+
+``` {r}
+library(DT)
+datatable(data, rownames = FALSE, filter = "top", options = list(pageLength = 10, scrollX = T))
+```
+
+
+### interactif
+```{r}
+library(dygraphs)
+library(xts)
+data3  = as.xts(data, order.by=data[,"date"])
+dygraph(data3 , main = "New Haven Temperatures")
+```
